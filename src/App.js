@@ -8,7 +8,7 @@ const App = props => {
 
   const [showForm, setShowForm] = useState(false)
 
-  const setShowFormHandler = event => {
+  const setShowFormHandler = () => {
     showForm ? setShowForm(false) : setShowForm(true)
   }
 
