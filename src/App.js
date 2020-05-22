@@ -34,27 +34,35 @@ const App = props => {
             body: JSON.stringify({ title: todoTitleValue, description: todoDescriptionValue})
         }
         fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
-            .then(response => console.log(response))
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch.')
+          }
+          return response.json()
+        })
+        .then(getTodoList())
     }
   }
 
-  useEffect(() => {
+  const getTodoList = () => {
     fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch.');
-        }
-        return response.json();
-      })
-      .then(todoListItems => {
-        setTodoList(todoListItems.data)
-      })
-  }, [])
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch.')
+      }
+      return response.json()
+    })
+    .then(todoListItems => {
+      setTodoList(todoListItems.data)
+    })
+  }
 
   let content = (
     <React.Fragment>
       <Header totalTodos='0'/>
-      <List listItems={todoList}/>
+      <List 
+        getTodoList={getTodoList}
+        listItems={todoList}/>
       <NewListForm
         onSetShowForm={setShowFormHandler}
         updateFormTitleValue={updateFormTitleHandler}
