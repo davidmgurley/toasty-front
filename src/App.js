@@ -40,7 +40,10 @@ const App = props => {
           }
           return response.json()
         })
-        .then(getTodoList())
+        .then(newListItem => {
+          console.log(newListItem)
+          getTodoList()
+        })
     }
   }
 
@@ -57,11 +60,30 @@ const App = props => {
     })
   }
 
+  const deleteItem = event => {
+    const deleteRequest = {
+      method: 'DELETE'
+    }
+    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + event.target.id, deleteRequest)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to delete.')
+      }
+      return response.json()
+    })
+    .then(deletedListItem => {
+      console.log(deletedListItem)
+      getTodoList()
+    })
+
+  }
+
   let content = (
     <React.Fragment>
       <Header totalTodos='0'/>
       <List 
         getTodoList={getTodoList}
+        deleteItem={deleteItem}
         listItems={todoList}/>
       <NewListForm
         onSetShowForm={setShowFormHandler}

@@ -11,7 +11,10 @@ const List = props => {
     let content = (
          <div>
              {props.listItems.map(item => (
-                 <h3>{item.title}</h3>
+                 <div>
+                    <h3>{item.title}</h3>
+                    <button id={item.id} onClick={props.deleteItem}>Delete</button>
+                </div>
              ))}
         </div>
     )
