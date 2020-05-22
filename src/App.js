@@ -8,7 +8,7 @@ const App = props => {
 
   const [showForm, setShowForm] = useState(false)
   const [todoTitleValue, setTodoTitleValue] = useState('')
-  const [todoDescriptionValue, setTodoDescriptionValue] = useState('')
+  const [todoDescriptionValue, setTodoDescriptionValue] = useState('placeholder')
   const [todoList, setTodoList] = useState([])
 
   const setShowFormHandler = () => {
@@ -80,7 +80,7 @@ const App = props => {
 
   let content = (
     <React.Fragment>
-      <Header totalTodos='0'/>
+      <Header totalTodos={todoList.length}/>
       <List 
         getTodoList={getTodoList}
         deleteItem={deleteItem}

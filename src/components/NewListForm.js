@@ -7,12 +7,10 @@ const NewListForm = props =>  {
     }
 
     let content = (
-
-    props.showForm === true ?
      <div>
         <form onSubmit={onFormSubmit}>
             <label>
-                Tos Do
+                Add To Your List (Marshmallows? Chocolate?)
             </label>
             <br/>
             <input 
@@ -22,29 +20,9 @@ const NewListForm = props =>  {
             value={props.todoTitleValue}
             onChange={props.updateFormTitleValue}
             />
-            <br/>
-            <label>
-                Description
-            </label>
-            <br/>
-            <input 
-            type='text' 
-            id='todoDescription' 
-            placeholder='Your next To Do'
-            value={props.todoDescriptionValue}
-            onChange={props.updateFormDescriptionValue}
-            />
-            <br/>
             <input type="submit"/>
         </form>
     </div>
-    : <div>
-            <button
-            onClick={props.onSetShowForm}
-            >
-                show form
-            </button>
-        </div>
     )
     return content
 }
