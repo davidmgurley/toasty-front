@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react'
 
-function Header (props) {
-    return (
+const Header = props => {
+    let content = (
         <div>
             <h1>
                 Toasty
@@ -11,6 +11,7 @@ function Header (props) {
             </h3>
         </div>
     )
+    return content
 }
 
 export default Header

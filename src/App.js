@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header'
 import List from './components/List'
 import NewListForm from './components/NewListForm'
 import './App.css';
 
-function App() {
-  return (
-    <div className="container">
+const App = props => {
+
+  const [showForm, setShowForm] = useState(false)
+
+  const setShowFormHandler = event => {
+    showForm ? setShowForm(false) : setShowForm(true)
+  }
+
+  let content = (
+    <React.Fragment>
       <Header totalTodos='0'/>
-      <List listItems=''/>
-      <NewListForm/>
-    </div>
-  );
+      <List listItems={[]}/>
+      <NewListForm
+        onSetShowForm={setShowFormHandler}
+        showForm={showForm}
+        />
+    </React.Fragment>
+  )
+
+  return content
 }
 
 export default App;
