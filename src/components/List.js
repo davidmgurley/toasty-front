@@ -3,9 +3,9 @@ import React, {useState, useEffect } from 'react'
 const List = props => {
     let content = (
          <div>
-            <h3>
-                List Items Go Here
-            </h3>
+             {props.listItems.map(item => (
+                 <h3>{item.title}</h3>
+             ))}
         </div>
     )
     return content

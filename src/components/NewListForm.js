@@ -1,24 +1,9 @@
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const NewListForm = props =>  {
-    const [todoTitle, setTodoTitle] = useState('')
-    const [todoDescription, setTodoDescription] = useState('')
-
     const onFormSubmit = event => {
         event.preventDefault()
-        if (todoTitle === '') {
-            console.log('error')
-        }
-        else {
-            const newListItem = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({ title: todoTitle, description: todoDescription})
-            }
-            fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
-                .then(response => console.log(response))
-        }
-        
+        props.submitForm()
     }
 
     let content = (
@@ -27,15 +12,15 @@ const NewListForm = props =>  {
      <div>
         <form onSubmit={onFormSubmit}>
             <label>
-                To Do
+                Tos Do
             </label>
             <br/>
             <input 
             type='text' 
             id='todoTitle' 
             placeholder='Your next To Do'
-            value={todoTitle}
-            onChange={e => setTodoTitle(e.target.value)}
+            value={props.todoTitleValue}
+            onChange={props.updateFormTitleValue}
             />
             <br/>
             <label>
@@ -46,8 +31,8 @@ const NewListForm = props =>  {
             type='text' 
             id='todoDescription' 
             placeholder='Your next To Do'
-            value={todoDescription}
-            onChange={e => setTodoDescription(e.target.value)}
+            value={props.todoDescriptionValue}
+            onChange={props.updateFormDescriptionValue}
             />
             <br/>
             <input type="submit"/>
