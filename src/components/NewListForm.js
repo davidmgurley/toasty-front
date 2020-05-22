@@ -15,7 +15,7 @@ const NewListForm = props =>  {
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ title: todoTitle, description: todoDescription})
             }
-            fetch('https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
+            fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
                 .then(response => console.log(response))
         }
         
