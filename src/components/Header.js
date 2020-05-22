@@ -2,7 +2,14 @@ import React from 'react';
 
 function Header (props) {
     return (
-        <h1>Toasty</h1>
+        <div>
+            <h1>
+                Toasty
+            </h1>
+            <h3>
+                You have {props.totalTodos} items on your list
+            </h3>
+        </div>
     )
 }
 

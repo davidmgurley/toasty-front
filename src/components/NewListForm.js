@@ -1,11 +1,11 @@
 import React from 'react'
 
-function List(props) {
+function NewListForm(props) {
     return <div>
             <h3>
-                List Items Go Here
+                Form Goes Here
             </h3>
         </div>
 }
 
-export default List
+export default NewListForm
