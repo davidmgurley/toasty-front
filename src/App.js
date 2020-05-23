@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header'
-import List from './components/List'
+import TodoList from './components/TodoList'
 import NewListForm from './components/NewListForm'
 import './App.css';
 
@@ -31,7 +31,7 @@ const App = props => {
         const newListItem = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({ title: todoTitleValue, description: todoDescriptionValue})
+            body: JSON.stringify({ title: todoTitleValue, description: todoDescriptionValue, position: todoList.length + 1})
         }
         fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
         .then(response => {
@@ -64,7 +64,7 @@ const App = props => {
     const deleteRequest = {
       method: 'DELETE'
     }
-    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + event.target.id, deleteRequest)
+    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + event.currentTarget.id, deleteRequest)
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to delete.')
@@ -78,13 +78,19 @@ const App = props => {
 
   }
 
+  const listDragUpdate = event => {
+    console.log(event.oldIndex)
+  }
+
   let content = (
     <React.Fragment>
       <Header totalTodos={todoList.length}/>
-      <List 
+      <TodoList 
         getTodoList={getTodoList}
         deleteItem={deleteItem}
-        listItems={todoList}/>
+        listDragUpdate={listDragUpdate}
+        setTodoList={setTodoList}
+        todoList={todoList}/>
       <NewListForm
         onSetShowForm={setShowFormHandler}
         updateFormTitleValue={updateFormTitleHandler}
