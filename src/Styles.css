@@ -1,3 +1,21 @@
 html {
-    background-color: black;
+    background-color: #091A2E;
+    color: #CECFD0 !important
+}
+
+ul:hover {
+    cursor: pointer;
+    background-color: #163963;
+}
+
+ul {
+    background-color: #1A2940;
+    border-radius: 25px;
+}
+
+.MuiButtonBase-root {
+    background-color: #CECFD0 !important;
+    min-width: 36px !important;
+    border-radius: 50px !important;
+    
 }

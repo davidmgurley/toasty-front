@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import Header from './components/Header'
 import TodoList from './components/TodoList'
 import NewListForm from './components/NewListForm'
-import './App.css';
+import './App.css'
+import './Styles.css'
 
 const App = props => {
 

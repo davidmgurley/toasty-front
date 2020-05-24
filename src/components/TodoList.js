@@ -18,7 +18,6 @@ const TodoList = props => {
         root: {
           width: '100%',
           maxWidth: 360,
-          backgroundColor: theme.palette.background.paper,
         },
       }))
 
@@ -41,7 +40,7 @@ const TodoList = props => {
             <List className={classes.root}>
                 <ListItem key={item.id}>
                     <ListItemText>{item.title}</ListItemText>
-                    <Button id={item.id} onClick={props.deleteItem}>Delete</Button>
+                    <Button id={item.id} onClick={props.deleteItem}>X</Button>
                 </ListItem>
             </List>
              ))}
