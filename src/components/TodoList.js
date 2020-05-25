@@ -10,10 +10,7 @@ const TodoList = props => {
     useEffect(() => {
         props.getTodoList()
     }, [])
-    const listDragUpdate = event => {
-        console.log('this thing ran')
-        console.log(event.oldIndex)
-    }
+
     let content = (
         <div className='todoList'>
             {props.isSearching ?
@@ -33,14 +30,14 @@ const TodoList = props => {
             : 
             <div>
             <h3>Drag and Drop to reorder your list!</h3>
-
             <ReactSortable 
             list={props.todoList} 
             setList={props.setTodoList}
             animation={200}
             delayOnTouchStart={true}
             delay={2}
-            onUpdate= {listDragUpdate}>
+            onEnd= {props.updateListOnSort}
+            >
                  {props.todoList.map(item => (
                 <List className={item.completed === 'complete' ? 'complete' : 'incomplete'}>
                     <ListItem key={item.id}>

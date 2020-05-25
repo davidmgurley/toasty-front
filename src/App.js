@@ -17,6 +17,7 @@ const App = props => {
   const [editOpen, setEditOpen] = useState(false)
   const [editItemId, setEditItemId] =useState('')
   const [editItemValue, setEditItemValue] = useState('')
+  const [sortIndex, setSortIndex] = useState('')
 
   const updateFormTitleHandler = event => {
     setTodoTitleValue(event.target.value)
@@ -75,6 +76,14 @@ const App = props => {
       setEditItemValue('')
       setEditItemId('')
     })
+  }
+
+  const updateListOnSort = () => {
+    setSearchValue(' ')
+    setIsSearching(true)
+    setFilteredList(todoList.filter(val => val.title.match(searchValue)))
+    setIsSearching(false)
+    setSearchValue('')
   }
 
   const submitFormHandler = () => {
@@ -147,8 +156,9 @@ const App = props => {
   const listDragUpdate = event => {
     console.log(event.oldIndex)
     console.log(event.newIndex)
-    console.log(event.id)
+    console.log(event.item.id)
   }
+
 
   let content = (
     <React.Fragment>
@@ -176,6 +186,8 @@ const App = props => {
         listDragUpdate={listDragUpdate}
         completeItem={setComplete}
         editItem={editItemHandler}
+        updateListOnSort={updateListOnSort}
+        setSortIndex={setSortIndex}
         isSearching={isSearching}
         setTodoList={setTodoList}
         todoList={filteredList}/>
