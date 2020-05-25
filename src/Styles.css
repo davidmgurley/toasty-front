@@ -5,7 +5,7 @@ html {
 
 ul:hover {
     cursor: pointer;
-    background-color: #163963;
+    background-color: #904647;
 }
 
 ul {
@@ -26,12 +26,27 @@ ul {
 }
 
 .leftColumn {
-    width: 25vw;
+    width: 35vw;
+    margin-right: 16px;
 }
 
 .rightColumn {
-    width: 25vw;
+    width: 35vw;
     overflow: scroll;
     max-height: 95vh;
     margin-top: 32px;
+    margin-left: 16px;
+}
+
+.form {
+    background-color: #CECFD0 !important;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.search {
+    width: 100%;
 }

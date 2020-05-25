@@ -7,14 +7,10 @@ import './Styles.css'
 
 const App = props => {
 
-  const [showForm, setShowForm] = useState(false)
   const [todoTitleValue, setTodoTitleValue] = useState('')
+  const [showError, setShowError] = useState(false)
   const [todoDescriptionValue, setTodoDescriptionValue] = useState('placeholder')
   const [todoList, setTodoList] = useState([])
-
-  const setShowFormHandler = () => {
-    showForm ? setShowForm(false) : setShowForm(true)
-  }
 
   const updateFormTitleHandler = event => {
     setTodoTitleValue(event.target.value)
@@ -26,7 +22,8 @@ const App = props => {
 
   const submitFormHandler = () => {
         if (todoTitleValue === '') {
-        console.log('error')
+          setShowError(true)
+          console.log('error')
     }
     else {
         const newListItem = {
@@ -45,6 +42,8 @@ const App = props => {
           console.log(newListItem)
           getTodoList()
         })
+        setTodoTitleValue('')
+        setShowError(false)
     }
   }
 
@@ -90,13 +89,12 @@ const App = props => {
       <div className='leftColumn'>
       <Header totalTodos={todoList.length}/>
       <NewListForm
-        onSetShowForm={setShowFormHandler}
         updateFormTitleValue={updateFormTitleHandler}
         updateFormDescriptionValue={updateFormDescriptionHandler}
         submitForm={submitFormHandler}
-        showForm={showForm}
         todoTitleValue={todoTitleValue}
         todoDescriptionValue={todoDescriptionValue}
+        showError={showError}
         />
       </div>
       <div className='rightColumn'>
