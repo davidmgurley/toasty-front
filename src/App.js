@@ -78,7 +78,15 @@ const App = props => {
     })
   }
 
-  const updateListOnSort = () => {
+  const updateListOnSort = event => {
+    for (var i = 0; i < todoList.length; i++) {
+      const reorderListItem = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ position: i})
+      }
+      fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + todoList[i].id, reorderListItem)
+    }
     setSearchValue(' ')
     setIsSearching(true)
     setFilteredList(todoList.filter(val => val.title.match(searchValue)))
@@ -153,13 +161,6 @@ const App = props => {
     setEditItemValue(event.target.value)
   }
 
-  const listDragUpdate = event => {
-    console.log(event.oldIndex)
-    console.log(event.newIndex)
-    console.log(event.item.id)
-  }
-
-
   let content = (
     <React.Fragment>
       <div className='mainContainer'>
@@ -183,7 +184,6 @@ const App = props => {
       <TodoList 
         getTodoList={getTodoList}
         deleteItem={deleteItem}
-        listDragUpdate={listDragUpdate}
         completeItem={setComplete}
         editItem={editItemHandler}
         updateListOnSort={updateListOnSort}

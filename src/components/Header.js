@@ -4,9 +4,6 @@ import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { Divider } from '@material-ui/core';
 
-
-// import SearchIcon from '@material-ui/icons/Search'
-
 const Header = props => {
     let content = (
         <div>

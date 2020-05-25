@@ -40,7 +40,7 @@ const TodoList = props => {
             >
                  {props.todoList.map(item => (
                 <List className={item.completed === 'complete' ? 'complete' : 'incomplete'}>
-                    <ListItem key={item.id}>
+                    <ListItem id={item.id + '_' + item.position} key={item.id}>
                         <ListItemText>{item.title}</ListItemText>
                         <Button className='completeButton' id={item.id} onClick={props.completeItem}>I DID IT!</Button>
                         <Button className='editButton' id={item.id} onClick={props.editItem}>Edit</Button>
