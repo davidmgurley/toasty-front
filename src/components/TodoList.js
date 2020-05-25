@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from 'react'
 import { ReactSortable } from "react-sortablejs"
-import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -11,35 +10,31 @@ const TodoList = props => {
     useEffect(() => {
         props.getTodoList()
     }, [])
-
-    const useStyles = makeStyles((theme) => ({
-        root: {
-          width: '100%',
-          maxWidth: 360,
-        },
-      }))
-
     const listDragUpdate = event => {
         console.log('this thing ran')
         console.log(event.oldIndex)
     }
-
-    const classes = useStyles()
-
     let content = (
-        <div>
+        <div className='todoList'>
             {props.isSearching ?
             <div>
+                <h3>Note: When Searching, drag and drop to reorder is disabled</h3>
                  {props.todoList.map(item => (
-                    <List className={classes.root}>
+                    <List className={item.completed === 'complete' ? 'complete' : 'incomplete'}>
                         <ListItem key={item.id}>
                             <ListItemText>{item.title}</ListItemText>
-                            <Button id={item.id} onClick={props.deleteItem}>X</Button>
+                            <Button className='completeButton' id={item.id} onClick={props.completeItem}>I DID IT!</Button>
+                            <Button className='editButton' id={item.id} onClick={props.editItem}>Edit</Button>
+                            <Button className='deleteButton' id={item.id} onClick={props.deleteItem}>X</Button>
                         </ListItem>
                     </List>
                      ))}
             </div>
-            : <ReactSortable 
+            : 
+            <div>
+            <h3>Drag and Drop to reorder your list!</h3>
+
+            <ReactSortable 
             list={props.todoList} 
             setList={props.setTodoList}
             animation={200}
@@ -47,14 +42,17 @@ const TodoList = props => {
             delay={2}
             onUpdate= {listDragUpdate}>
                  {props.todoList.map(item => (
-                <List className={classes.root}>
+                <List className={item.completed === 'complete' ? 'complete' : 'incomplete'}>
                     <ListItem key={item.id}>
                         <ListItemText>{item.title}</ListItemText>
-                        <Button id={item.id} onClick={props.deleteItem}>X</Button>
+                        <Button className='completeButton' id={item.id} onClick={props.completeItem}>I DID IT!</Button>
+                        <Button className='editButton' id={item.id} onClick={props.editItem}>Edit</Button>
+                        <Button className='deleteButton' id={item.id} onClick={props.deleteItem}>X</Button>
                     </ListItem>
                 </List>
                  ))}
-            </ReactSortable>}
+            </ReactSortable>
+            </div>}
         </div>
 
     )

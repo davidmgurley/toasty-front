@@ -7,9 +7,13 @@ import { InputLabel } from '@material-ui/core';
 
 const NewListForm = props =>  {
     const onFormSubmit = event => {
-        console.log('submit')
         event.preventDefault()
         props.submitForm()
+    }
+
+    const onEditFormSubmit = event => {
+        event.preventDefault()
+        props.submitEditForm()
     }
 
     let content = (
@@ -39,6 +43,30 @@ const NewListForm = props =>  {
         {props.showError === true ?
         <h3>Cannot add blank To Do item</h3>
         :  ''}
+        <div>
+            {props.editOpen ? 
+            <form onSubmit={onEditFormSubmit}>
+                <div className='formContainer'>
+                    <FormControl variant='filled'>
+                    <InputLabel className='form'>
+                        Edit Your To Do Item
+                    </InputLabel>
+                    <FilledInput
+                    className='form'
+                    htmlFor='component-filled'
+                    type='text' 
+                    id='editField' 
+                    value={props.editValue}
+                    onChange={props.updateEditValue}
+                    />
+                    </FormControl>
+                    <FormControl variant='filled'>
+                        <FilledInput className='form' htmlFor='component-filled' type='submit'/>
+                    </FormControl>
+                </div>
+            </form>
+        : ''}
+        </div>
     </div>
     )
     return content

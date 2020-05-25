@@ -12,8 +12,11 @@ const App = props => {
   const [todoDescriptionValue, setTodoDescriptionValue] = useState('placeholder')
   const [todoList, setTodoList] = useState([])
   const [filteredList, setFilteredList] = useState([])
-  const [isSearching, setIsSearching] = useState(true)
+  const [isSearching, setIsSearching] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const [editOpen, setEditOpen] = useState(false)
+  const [editItemId, setEditItemId] =useState('')
+  const [editItemValue, setEditItemValue] = useState('')
 
   const updateFormTitleHandler = event => {
     setTodoTitleValue(event.target.value)
@@ -22,17 +25,56 @@ const App = props => {
   const setSearchValueHandler = event => {
     setSearchValue(event.target.value)
     let searchInput = event.target.value.trim().toLowerCase();
-    var tempTodoList = todoList
-    console.log(searchInput)
     if (searchInput.length > 0) {
-      setFilteredList(tempTodoList.filter(val => val.title.toLowerCase().match(searchInput)))
+      setIsSearching(true)
+      setFilteredList(todoList.filter(val => val.title.toLowerCase().match(searchInput)))
     }
-    else setFilteredList(todoList)
-    // updateListWithSearch()
+    else {
+      setFilteredList(todoList) 
+      setIsSearching(false)
+    }
   }
 
-  const updateListWithSearch = () => {
+  const setComplete = event => {
+    const newListItem = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({ completed: 'complete'})
+    }
+    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + event.currentTarget.id, newListItem)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to complete.')
+      }
+      return response.json()
+    })
+    .then(completedListItem => {
+      console.log(completedListItem)
+      getTodoList()
+    })
+  }
 
+  const editItemSubmitHandler = () => {
+    const newListItem = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({ title: editItemValue})
+    }
+    console.log(newListItem)
+    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + editItemId, newListItem)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to edit.')
+      }
+      return response.json()
+    })
+    .then(editedListItem => {
+      console.log(editedListItem)
+      getTodoList()
+      setEditOpen(false)
+      setEditItemValue('')
+      setEditItemId('')
+    })
   }
 
   const submitFormHandler = () => {
@@ -91,7 +133,15 @@ const App = props => {
       console.log(deletedListItem)
       getTodoList()
     })
+  }
 
+  const editItemHandler = event => {
+    setEditOpen(true)
+    setEditItemId(event.currentTarget.id)
+  }
+
+  const updateEditValueHandler = event => {
+    setEditItemValue(event.target.value)
   }
 
   const listDragUpdate = event => {
@@ -112,6 +162,9 @@ const App = props => {
       <NewListForm
         updateFormTitleValue={updateFormTitleHandler}
         submitForm={submitFormHandler}
+        editOpen={editOpen}
+        submitEditForm={editItemSubmitHandler}
+        updateEditValue={updateEditValueHandler}
         todoTitleValue={todoTitleValue}
         showError={showError}
         />
@@ -121,6 +174,8 @@ const App = props => {
         getTodoList={getTodoList}
         deleteItem={deleteItem}
         listDragUpdate={listDragUpdate}
+        completeItem={setComplete}
+        editItem={editItemHandler}
         isSearching={isSearching}
         setTodoList={setTodoList}
         todoList={filteredList}/>

@@ -21,8 +21,8 @@ ul:hover {
 }
 
 ul {
-    background-color: #1A2940;
     border-radius: 25px;
+    width: 40vw !important;
 }
 
 .MuiButtonBase-root {
@@ -38,17 +38,17 @@ ul {
 }
 
 .leftColumn {
-    width: 35vw;
+    width: 45vw;
     margin-right: 16px;
 }
 
 .rightColumn {
-    width: 35vw;
+    width: 45vw;
     overflow: scroll;
     max-height: 95vh;
     margin-top: 32px;
     margin-left: 16px;
-    margin-top: 176.72px;
+    margin-top: 117.28px;
 }
 
 .form {
@@ -67,4 +67,19 @@ ul {
 
 .divider {
     background-color: #CECFD0 !important;
+}
+
+.completeButton {
+    margin-right: 16px !important;
+    max-height: 36px !important;
+    min-width: 52.781px;
+    white-space: nowrap;
+}
+
+.complete {
+    background-color: #588C7F;
+}
+
+.incomplete {
+    background-color: #1A2940;
 }
