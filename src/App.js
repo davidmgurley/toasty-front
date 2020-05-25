@@ -42,7 +42,7 @@ const App = props => {
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({ completed: 'complete'})
     }
-    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + event.currentTarget.id, newListItem)
+    fetch('https://toasty-todo.herokuapp.com/api/v1/todos/' + event.currentTarget.id, newListItem)
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to complete.')
@@ -62,7 +62,7 @@ const App = props => {
       body: JSON.stringify({ title: editItemValue})
     }
     console.log(newListItem)
-    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + editItemId, newListItem)
+    fetch('https://toasty-todo.herokuapp.com/api/v1/todos/' + editItemId, newListItem)
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to edit.')
@@ -85,7 +85,7 @@ const App = props => {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ position: i})
       }
-      fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + todoList[i].id, reorderListItem)
+      fetch('https://toasty-todo.herokuapp.com/api/v1/todos/' + todoList[i].id, reorderListItem)
     }
     setSearchValue(' ')
     setIsSearching(true)
@@ -105,7 +105,7 @@ const App = props => {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ title: todoTitleValue, description: todoDescriptionValue, position: todoList.length + 1})
         }
-        fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
+        fetch('https://toasty-todo.herokuapp.com/api/v1/todos', newListItem)
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to fetch.')
@@ -122,7 +122,7 @@ const App = props => {
   }
 
   const getTodoList = () => {
-    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos')
+    fetch('https://toasty-todo.herokuapp.com/api/v1/todos')
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to fetch.')
@@ -139,7 +139,7 @@ const App = props => {
     const deleteRequest = {
       method: 'DELETE'
     }
-    fetch('https://cors-anywhere.herokuapp.com/https://toasty-todo.herokuapp.com/api/v1/todos/' + event.currentTarget.id, deleteRequest)
+    fetch('https://toasty-todo.herokuapp.com/api/v1/todos/' + event.currentTarget.id, deleteRequest)
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to delete.')
