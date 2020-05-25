@@ -85,13 +85,10 @@ const App = props => {
 
   let content = (
     <React.Fragment>
+      <div className='mainContainer'>
+
+      <div className='leftColumn'>
       <Header totalTodos={todoList.length}/>
-      <TodoList 
-        getTodoList={getTodoList}
-        deleteItem={deleteItem}
-        listDragUpdate={listDragUpdate}
-        setTodoList={setTodoList}
-        todoList={todoList}/>
       <NewListForm
         onSetShowForm={setShowFormHandler}
         updateFormTitleValue={updateFormTitleHandler}
@@ -101,6 +98,16 @@ const App = props => {
         todoTitleValue={todoTitleValue}
         todoDescriptionValue={todoDescriptionValue}
         />
+      </div>
+      <div className='rightColumn'>
+      <TodoList 
+        getTodoList={getTodoList}
+        deleteItem={deleteItem}
+        listDragUpdate={listDragUpdate}
+        setTodoList={setTodoList}
+        todoList={todoList}/>
+      </div>
+      </div>
     </React.Fragment>
   )
 

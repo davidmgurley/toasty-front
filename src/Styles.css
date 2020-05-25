@@ -17,5 +17,21 @@ ul {
     background-color: #CECFD0 !important;
     min-width: 36px !important;
     border-radius: 50px !important;
-    
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.leftColumn {
+    width: 25vw;
+}
+
+.rightColumn {
+    width: 25vw;
+    overflow: scroll;
+    max-height: 95vh;
+    margin-top: 32px;
 }
