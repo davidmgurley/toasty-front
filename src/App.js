@@ -11,13 +11,28 @@ const App = props => {
   const [showError, setShowError] = useState(false)
   const [todoDescriptionValue, setTodoDescriptionValue] = useState('placeholder')
   const [todoList, setTodoList] = useState([])
+  const [filteredList, setFilteredList] = useState([])
+  const [isSearching, setIsSearching] = useState(true)
+  const [searchValue, setSearchValue] = useState('')
 
   const updateFormTitleHandler = event => {
     setTodoTitleValue(event.target.value)
   }
 
-  const updateFormDescriptionHandler = event => {
-    setTodoDescriptionValue(event.target.value)
+  const setSearchValueHandler = event => {
+    setSearchValue(event.target.value)
+    let searchInput = event.target.value.trim().toLowerCase();
+    var tempTodoList = todoList
+    console.log(searchInput)
+    if (searchInput.length > 0) {
+      setFilteredList(tempTodoList.filter(val => val.title.toLowerCase().match(searchInput)))
+    }
+    else setFilteredList(todoList)
+    // updateListWithSearch()
+  }
+
+  const updateListWithSearch = () => {
+
   }
 
   const submitFormHandler = () => {
@@ -57,6 +72,7 @@ const App = props => {
     })
     .then(todoListItems => {
       setTodoList(todoListItems.data)
+      setFilteredList(todoListItems.data)
     })
   }
 
@@ -80,6 +96,8 @@ const App = props => {
 
   const listDragUpdate = event => {
     console.log(event.oldIndex)
+    console.log(event.newIndex)
+    console.log(event.id)
   }
 
   let content = (
@@ -87,13 +105,14 @@ const App = props => {
       <div className='mainContainer'>
 
       <div className='leftColumn'>
-      <Header totalTodos={todoList.length}/>
+      <Header 
+        searchValue={searchValue}
+        setSearchValue={setSearchValueHandler}
+        totalTodos={todoList.length}/>
       <NewListForm
         updateFormTitleValue={updateFormTitleHandler}
-        updateFormDescriptionValue={updateFormDescriptionHandler}
         submitForm={submitFormHandler}
         todoTitleValue={todoTitleValue}
-        todoDescriptionValue={todoDescriptionValue}
         showError={showError}
         />
       </div>
@@ -102,13 +121,13 @@ const App = props => {
         getTodoList={getTodoList}
         deleteItem={deleteItem}
         listDragUpdate={listDragUpdate}
+        isSearching={isSearching}
         setTodoList={setTodoList}
-        todoList={todoList}/>
+        todoList={filteredList}/>
       </div>
       </div>
     </React.Fragment>
   )
-
   return content
 }
 
