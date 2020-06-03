@@ -23,7 +23,7 @@ const Header = props => {
                 className='form'
                 htmlFor='component-filled'
                 type='text' 
-                id='todoTitle' 
+                id='todoSearch' 
                 placeholder='Search...'
               />
             </FormControl>
