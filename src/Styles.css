@@ -87,3 +87,8 @@ ul {
 .incomplete {
     background-color: #1A2940;
 }
+
+.countTextHeader {
+    display: flex;
+    flex-direction: row;
+}

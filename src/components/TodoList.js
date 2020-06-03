@@ -12,7 +12,7 @@ const TodoList = props => {
     }, [])
 
     let content = (
-        <div className='todoList'>
+        <div>
             {props.isSearching ?
             <div>
                 <h3>Note: When Searching, drag and drop to reorder is disabled</h3>
@@ -30,7 +30,7 @@ const TodoList = props => {
             : 
             <div>
             <h3>Drag and Drop to reorder your list!</h3>
-            <ReactSortable 
+            <ReactSortable
             list={props.todoList} 
             setList={props.setTodoList}
             animation={200}
@@ -39,8 +39,8 @@ const TodoList = props => {
             onEnd= {props.updateListOnSort}
             >
                  {props.todoList.map(item => (
-                <List className={item.completed === 'complete' ? 'complete' : 'incomplete'}>
-                    <ListItem id={item.id + '_' + item.position} key={item.id}>
+                <List className= {item.completed === 'complete' ? 'complete' : 'incomplete'}>
+                    <ListItem className='todoList' id={item.id + '_' + item.position} key={item.id}>
                         <ListItemText>{item.title}</ListItemText>
                         <Button className='completeButton' id={item.id} onClick={props.completeItem}>I DID IT!</Button>
                         <Button className='editButton' id={item.id} onClick={props.editItem}>Edit</Button>
