@@ -61,7 +61,7 @@ const NewListForm = props =>  {
                     />
                     </FormControl>
                     <FormControl variant='filled'>
-                        <FilledInput className='form' htmlFor='component-filled' type='submit'/>
+                        <FilledInput id='editSubmitButton' className='form' htmlFor='component-filled' type='submit'/>
                     </FormControl>
                 </div>
             </form>

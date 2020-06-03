@@ -44,6 +44,20 @@ describe('you can edit a list item', () => {
       })
     })
   })
+  it('reveals the edit panel', () => {
+    cy.get('#editField')
+  })
+  it('has an edit field you can type in', () => {
+    cy.get('#editField').type(' Edited')
+  })
+  it('has a submit button and updates original item', () => {
+    cy.get('#editSubmitButton').click()
+    cy.wait(1000)
+    cy.get('.todoList').then(($list) => {
+      const lastListItem = $list[$list.length - 1]
+      expect(lastListItem).to.have.text('New Test To Do From Cypress EditedI DID IT!EditX')
+    })
+  })
 })
 
 describe('you can delete a list item', () => {
@@ -59,7 +73,7 @@ describe('you can delete a list item', () => {
     cy.wait(1000)
     cy.get('.todoList').then(($list) => {
       const lastListItem = $list[$list.length - 1]
-      expect(lastListItem).to.not.have.text('New Edited Test To Do From CypressI DID IT!EditX')
+      expect(lastListItem).to.not.have.text('New Test To Do From Cypress EditedI DID IT!EditX')
     })
   })
 })
