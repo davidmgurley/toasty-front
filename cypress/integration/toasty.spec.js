@@ -35,6 +35,17 @@ describe('Ability to add to your list', () => {
   })
 })
 
+describe('you can edit a list item', () => {
+  it('has an edit button to click', () => {
+    cy.get('.todoList').then(($list) => {
+      const lastListItem = $list[$list.length - 1]
+      cy.get(lastListItem).within(() => {
+        cy.get('.editButton').click()
+      })
+    })
+  })
+})
+
 describe('you can delete a list item', () => {
   it('has a delete button to click', () => {
     cy.get('.todoList').then(($list) => {
@@ -48,7 +59,7 @@ describe('you can delete a list item', () => {
     cy.wait(1000)
     cy.get('.todoList').then(($list) => {
       const lastListItem = $list[$list.length - 1]
-      expect(lastListItem).to.not.have.text('New Test To Do From CypressI DID IT!EditX')
+      expect(lastListItem).to.not.have.text('New Edited Test To Do From CypressI DID IT!EditX')
     })
   })
 })

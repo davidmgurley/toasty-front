@@ -136,6 +136,9 @@ const App = props => {
   }
 
   const deleteItem = event => {
+    setEditOpen(false)
+    setEditItemId('')
+    setEditItemValue('')
     const deleteRequest = {
       method: 'DELETE'
     }
@@ -155,6 +158,8 @@ const App = props => {
   const editItemHandler = event => {
     setEditOpen(true)
     setEditItemId(event.currentTarget.id)
+    setEditItemValue(event.currentTarget.parentNode.children[0].children[0].innerText)    
+    console.log(editItemValue)
   }
 
   const updateEditValueHandler = event => {
@@ -173,6 +178,7 @@ const App = props => {
       <NewListForm
         updateFormTitleValue={updateFormTitleHandler}
         submitForm={submitFormHandler}
+        editValue={editItemValue}
         editOpen={editOpen}
         submitEditForm={editItemSubmitHandler}
         updateEditValue={updateEditValueHandler}
