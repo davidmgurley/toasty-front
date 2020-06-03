@@ -5,7 +5,7 @@ describe('The Page Loads', () => {
 })
 
 describe('The list loads and number in header is accurate', () => {
-  it('the list elements exist', () => {
+  it('the list elements exist and give their count to the header', () => {
     cy.get('.todoList').then(($list) => {
       const listNumber = $list.length.toString()
       cy.get('.countText').should(($countText)=> {
@@ -74,6 +74,17 @@ describe('you can delete a list item', () => {
     cy.get('.todoList').then(($list) => {
       const lastListItem = $list[$list.length - 1]
       expect(lastListItem).to.not.have.text('New Test To Do From Cypress EditedI DID IT!EditX')
+    })
+  })
+})
+
+describe('The list loads and number in header is accurate after all that', () => {
+  it('the list elements exist and give their count to the header', () => {
+    cy.get('.todoList').then(($list) => {
+      const listNumber = $list.length.toString()
+      cy.get('.countText').should(($countText)=> {
+        expect($countText).to.have.text('You have' + ' ' + listNumber + ' ' + 'items on your list')
+      })
     })
   })
 })
