@@ -27,3 +27,4 @@ https://www.youtube.com/watch?v=-MlNBTSg_Ww&t=1878s
 5. Postgres
 6. Express
 7. Heroku
+8. Cypress
