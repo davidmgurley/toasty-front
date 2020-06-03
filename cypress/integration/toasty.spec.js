@@ -60,6 +60,24 @@ describe('you can edit a list item', () => {
   })
 })
 
+describe('you can complete and item', () => {
+  it('has a complete button to click', () => {
+    cy.get('.todoList').then(($list) => {
+      const lastListItem = $list[$list.length - 1]
+      cy.get(lastListItem).within(() => {
+        cy.get('.completeButton').click()
+      })
+    })
+  })
+  it('changes the class of the original item to completed', () => {
+    cy.wait(1000)
+    cy.get('.todoList').then(($list) => {
+      const lastListItem = $list[$list.length - 1].parentNode
+      expect(lastListItem).to.have.class('complete')
+    })
+  })
+})
+
 describe('you can delete a list item', () => {
   it('has a delete button to click', () => {
     cy.get('.todoList').then(($list) => {
